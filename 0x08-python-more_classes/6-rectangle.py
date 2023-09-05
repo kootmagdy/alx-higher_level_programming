@@ -6,14 +6,20 @@ Defines a class Rectangle
 
 class Rectangle:
     """Representation of a rectangle"""
+
     number_of_instances = 0
-    
+
     def __init__(self, width=0, height=0):
         """Initializes the rectangle"""
         self.width = width
         self.height = height
         Rectangle.number_of_instances += 1
-    
+
+    def __del__(self):
+        """prints a string when an instance has been deleted"""
+        print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1
+
     @property
     def width(self):
         """getter for the private instance attribute width"""
@@ -63,8 +69,3 @@ class Rectangle:
     def __repr__(self):
         """returns a string representation of the rectangle for reproduction"""
         return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
-
-    def __del__(self):
-        """Print a message for every deletion of a Rectangle."""
-        print("Bye rectangle...")
-        Rectangle.number_of_instances -= 1
