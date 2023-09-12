@@ -1,17 +1,17 @@
 #!/usr/bin/python3
-'''Module for saving argv info via json to file.'''
-import json
-import os.path
+'''task 7 module'''
+
+
 import sys
-save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
-load_from_json_file = __import__('8-load_from_json_file').load_from_json_file
+save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
-file = "add_item.json"
-json_list = []
-if os.path.exists(file):
-    json_list = load_from_json_file(file)
+arglist = list(sys.argv[1:])
 
-for i in range(1, len(sys.argv)):
-    json_list.append(sys.argv[i])
+try:
+    old_data = load_from_json_file('add_item.json')
+except Exception:
+    old_data = []
 
-save_to_json_file(json_list, file)
+old_data.extend(arglist)
+save_to_json_file(old_data, 'add_item.json')
